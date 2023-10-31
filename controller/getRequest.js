@@ -29,7 +29,7 @@ exports.getAllQuestons = async(req,res)=>{
         const {userHandle} = req.body;
         const questionsList = await allQuestions.find({});
 
-        if(userHandle == null){
+        if(userHandle == null || questionsList == null){
             // console.log('user is not login');
             return res.status(200).json({
                 questionsList
@@ -42,6 +42,7 @@ exports.getAllQuestons = async(req,res)=>{
         // console.log(currUser);
 
         const userQuestion = await questions.findById(currUser.questionSolved);
+
         const userSolvedQuestionList = userQuestion.total;
         // console.log('sdfgdsfg',userSolvedQuestionList);
 
@@ -53,6 +54,7 @@ exports.getAllQuestons = async(req,res)=>{
                 questionsList[i].isSolved = false;
             }
         }
+
         return res.status(200).json({
             questionsList
         });
