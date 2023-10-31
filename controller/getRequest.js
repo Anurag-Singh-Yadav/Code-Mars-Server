@@ -47,7 +47,7 @@ exports.getAllQuestons = async(req,res)=>{
         // console.log('sdfgdsfg',userSolvedQuestionList);
 
 
-        for(let i = 0;i < questionsList.length;i++) {
+        for(let i = 0;i < questionsList?.length;i++) {
             if(userSolvedQuestionList.includes(questionsList[i]._id)){
                 questionsList[i].isSolved = true;
             }else{
@@ -118,7 +118,7 @@ exports.getUserDetails = async(req,res)=>{
         
         const hard = questionDetails.hard;
         
-        const total = questionDetails.total.length;
+        const total = questionDetails.total?.length;
         
         userDetails.password = undefined;
         

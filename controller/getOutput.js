@@ -112,16 +112,16 @@ async function utilityGetOutput(language, code, input) {
 function judge(a, b) {
   function extractWords(str) {
     const words = str.split(/\s+/);
-    return words.filter(word => word.length > 0);
+    return words.filter(word => word?.length > 0);
   }
   
   const wordA = extractWords(a), wordB = extractWords(b);
 
-  if (wordA.length !== wordB.length) {
+  if (wordA?.length !== wordB?.length) {
     return false;
   }
 
-  for (let i = 0; i < wordA.length; i++) {
+  for (let i = 0; i < wordA?.length; i++) {
     if (wordA[i] !== wordB[i]) {
       return false;
     }
@@ -135,12 +135,12 @@ exports.submitCode = async (req, res) => {
     const userHandle = req.user.userHandle;
     const problem = await allQuestions.findById(qid);
     // console.log(problem);
-    for(let i = 0 ; i < problem.main.length ; i++){
+    for(let i = 0 ; i < problem.main?.length ; i++){
 
       const output = await utilityGetOutput(language , code , problem.main[i]);
 
       if(!judge(output , problem.mainAnswer[i])){
-        const verdict =  `Wrong answer, passed: ${i}/${problem.main.length}`
+        const verdict =  `Wrong answer, passed: ${i}/${problem.main?.length}`
         await allSubmissionSchema.create({
           qid:problem._id,
           userHandle: userHandle,
@@ -156,8 +156,8 @@ exports.submitCode = async (req, res) => {
       }
 
     }
-    const verdict =`Correct answer, passed: ${problem.main.length}
-    /${problem.main.length}`
+    const verdict =`Correct answer, passed: ${problem.main?.length}
+    /${problem.main?.length}`
     await allSubmissionSchema.create({
       qid:qid,
       userHandle: userHandle,
