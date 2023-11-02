@@ -95,8 +95,17 @@ exports.getUserDetails = async(req,res)=>{
         const questionDetails = await questions.findById(userDetails.questionSolved);
         const totalUser =await user.countDocuments({});
         // console.log(questionDetails);
-        const userProfile = await profile.findById(userDetails.accountDetails);
-        // console.log(userProfile);
+        
+        // console.log('fgghjfddfghj',userProfile);
+        const userAllDetails = await profile.findById(userDetails.accountDetails);
+
+        const userProfile ={
+            Country: userAllDetails.country,
+            LinkedIn: userAllDetails.linkedin,
+            Github: userAllDetails.github,
+            Twitter: userAllDetails.twitter,
+            
+        }
         // console.log('i am here');
         const questionSolvedByUser = await allSubmission.find({userHandle: userHandle});
         questionSolvedByUser.reverse();
@@ -108,7 +117,6 @@ exports.getUserDetails = async(req,res)=>{
         const totalMedium = await allQuestions.countDocuments({ difficulty: 'medium' });
         const totalHard = await allQuestions.countDocuments({ difficulty: 'hard' });
 
-        
 
         const score = questionDetails.score;
         
@@ -132,13 +140,14 @@ exports.getUserDetails = async(req,res)=>{
             medium,
             hard,
         }
-
+        const userFullName = userAllDetails.firstName + " " + userAllDetails.lastName;
         const totalData = {
             totalEasy,
             totalMedium,
             totalHard,
             rank,
-            totalUser
+            userFullName,
+            totalUser,
         }
 
         userDetails.questionSolved = undefined;
@@ -146,6 +155,8 @@ exports.getUserDetails = async(req,res)=>{
             userDetails,
 
             totalData,
+
+            userAllDetails,
 
             userProfile,
 

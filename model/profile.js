@@ -20,7 +20,7 @@ const userProfile = new Schema({
         default:null,
     },
     contact:{
-        type:Number,
+        type:String,
         trim:true,
         default:null,
     },

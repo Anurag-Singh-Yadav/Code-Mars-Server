@@ -9,8 +9,12 @@ const dotenv = require("dotenv");
 const fs = require('fs');
 const ejs = require('ejs');
 const mailSender = require('../utilis/mailSender');
+
 const path = require('path');
 const ejsTemplatePath = path.join(__dirname, 'otpBody.ejs');
+
+// const ejsTemplatePath = path.join(__dirname, 'otpBody.ejs');
+
 dotenv.config();
 
 exports.isUserExist = async (req,res)=>{

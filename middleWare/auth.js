@@ -30,7 +30,7 @@ exports.auth = async(req, res, next) => {
   } catch (err) {
     return res.status(500).json({
       success: false,
-      message: "error in decoding token",
+      message: "error in process of decoding token",
     });
   }
 };

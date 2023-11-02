@@ -4,7 +4,7 @@ const router = express.Router();
 // import 
 const {signup,login ,sendOTP,isUserExist,resetPassword,sendOtpResetPassword} = require('../controller/auth');
 
-const {userReqAddQues} = require('../controller/userReqAddQues');
+const {userReqAddQues,editProfile} = require('../controller/userReqAddQues');
 // middleware
 
 const {auth} = require('../middleWare/auth');
@@ -14,7 +14,8 @@ const {auth} = require('../middleWare/auth');
 router.post('/otp',sendOTP);
 router.post('/otp/signup',signup);
 router.post('/login',login);
-router.post('/userReqAddQues',userReqAddQues)
+router.post('/userReqAddQues',userReqAddQues);
+router.post('/editProfile/:userHandle',auth,editProfile);
 
 
 
