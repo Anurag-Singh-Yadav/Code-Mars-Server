@@ -83,6 +83,7 @@ exports.adminQuestion = async(req,res,)=>{
     // console.log(e);
     return res.status(500).json({
       success:false,
+      error:e,
       message:"error in adding question",
     });
   }
