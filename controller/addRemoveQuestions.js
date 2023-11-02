@@ -71,9 +71,9 @@ async function deleteQuestion(_id) {
 
 exports.adminQuestion = async(req,res,)=>{
   try{
-    // console.log('i am admin to add question')
+    console.log('i am admin to add question')
     const {author,title,description,sample,constraints,main,sampleAnswer,mainAnswer,difficulty,tags} = req.body;
-    // console.log(req.body);
+    console.log(req.body);
     await allQuestions.create({author,title,constraints,description,sample,main,sampleAnswer,difficulty,tags,mainAnswer});
     return res.status(200).json({
       success: true,
@@ -83,6 +83,7 @@ exports.adminQuestion = async(req,res,)=>{
     // console.log(e);
     return res.status(500).json({
       success:false,
+      message:"error in adding question",
     });
   }
 }
