@@ -185,12 +185,21 @@ exports.sendOTP = async (req, res) => {
         upperCaseAlphabets:false,
         specialChars:false,
       })
-      await OTP.create({ email,otp});
+      // console.log('new otp is created');
+      try{
+        const res = await OTP.create({ email,otp});
+      }catch(e){
+        return res.status(402).json({
+          success: false,
+          message: "Error in storing OTP",
+          error:e,
+        });
+      }
     }
     // console.log(otp);
     const otpInfo = {
-      title: 'Email verification to Sign up for DSA Tracker',
-      purpose: "Thank you for registering with DSA Tracker. To complete your registration, please use the following OTP (One-Time Password) to verify your account:",
+      title: 'Email verification to Sign up for Code-Mars',
+      purpose: "Thank you for registering with Code-Mars. To complete your registration, please use the following OTP (One-Time Password) to verify your account:",
       OTP: otp  // Corrected template variable
     };
 
